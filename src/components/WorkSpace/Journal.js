@@ -111,11 +111,30 @@ const Journal = () => {
   };
 
   const handleRecordClick = (record, event) => {
+    event.stopPropagation();
+    
+    const windowWidth = window.innerWidth;
+    const formWidth = 300; // Ширина формы
+    const padding = 20;
+    const extraOffset = 350; // Дополнительное смещение влево
+    
+    let x = event.clientX - extraOffset; // Смещаем форму левее
+    
+    // Проверяем, выходит ли форма за правый край экрана
+    if (x + formWidth > windowWidth) {
+      x = windowWidth - formWidth - padding;
+    }
+    
+    // Проверяем, не выходит ли форма за левый край
+    if (x < padding) {
+      x = padding;
+    }
+
     setEditingRecord(record);
     setSelectedTime(record.startTime);
     setFormPosition({
-      x: event.clientX,
-      y: event.clientY,
+      x: x,
+      y: event.clientY
     });
     setShowForm(true);
   };

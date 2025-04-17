@@ -277,11 +277,12 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  max-height: 90vh;
-  overflow-y: auto;
+  width: 350px;
+  height: auto;
   margin: 20px 0;
   transform: translateY(-200px);
   animation: slideIn 0.2s ease-in-out;
+  overflow: visible; /* Убираем скролл */
 }
 
 @keyframes fadeIn {
