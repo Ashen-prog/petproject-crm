@@ -24,6 +24,26 @@ const Journal = () => {
     return (duration / 15) * 30; // 30px на каждые 15 минут
   };
 
+  // Функция для форматирования времени
+  const formatTimeRange = (startTime, duration) => {
+    const [hours, minutes] = startTime.split(':');
+    const start = new Date();
+    start.setHours(parseInt(hours), parseInt(minutes));
+    
+    const end = new Date(start);
+    end.setMinutes(end.getMinutes() + duration);
+    
+    const formatTime = (date) => {
+      return date.toLocaleTimeString('ru-RU', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      });
+    };
+    
+    return `${formatTime(start)} - ${formatTime(end)}`;
+  };
+
   const handleTimeSlotClick = (time, event) => {
     setSelectedTime(time);
     setFormPosition({
@@ -130,6 +150,11 @@ const Journal = () => {
                       cursor: "pointer", // Добавляем курсор-указатель
                     }}
                   >
+                    <div className={styles.recordHeader}>
+                      <span className={styles.recordTime}>
+                        {formatTimeRange(record.startTime, record.duration)}
+                      </span>
+                    </div>
                     <div className={styles.recordContent}>
                       <div className={styles.recordTitle}>{record.title}</div>
                       <div className={styles.recordClient}>

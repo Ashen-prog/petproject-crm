@@ -1,11 +1,10 @@
 .WS_Header {
-    background-color: #ffffff;
-    height: 5vw;
-    width: 90%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 .WS_Header button {
@@ -34,4 +33,50 @@
     font-size: 18px;
     padding: 5px 15px !important;
     min-width: 40px;
+}
+
+.dateControls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logoutButton {
+    background: transparent;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+
+.logoutButton:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+.headerControls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.addEmployeeButton {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.addEmployeeButton:hover {
+    background: rgba(52, 152, 219, 0.1);
+    transform: translateY(-1px);
 }

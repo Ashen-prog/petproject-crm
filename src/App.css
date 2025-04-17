@@ -1,5 +1,15 @@
+:root {
+  --accent-color: #3498db;
+  --text-color: #2c3e50;
+  --background-color: #ffffff;
+  --hover-color: rgba(52, 152, 219, 0.1);
+}
+
 .App {
   text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -26,6 +36,164 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.Auth {
+  min-height: 100vh;
+  background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+  background-size: 100% 32px;
+  position: relative;
+}
+
+.Auth::before {
+  content: '';
+  position: absolute;
+  left: 40px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #ff9999;
+  opacity: 0.5;
+}
+
+.welcomeContainer {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 40px;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+}
+
+.welcomeContainer h1 {
+  font-size: 3rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.welcomeContainer p {
+  font-size: 1.5rem;
+  color: #7f8c8d;
+  margin-bottom: 40px;
+}
+
+.authButtons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.demoButton, .loginButton {
+  padding: 12px 30px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.demoButton {
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.demoButton:hover {
+  background: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+.loginButton {
+  background: var(--accent-color);
+  border: none;
+  color: white;
+}
+
+.loginButton:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loginForm {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.loginForm input {
+  padding: 12px 20px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  border: none;
+  border-bottom: 2px solid #e1e1e1;
+  background: transparent;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+}
+
+.loginForm input::placeholder {
+  color: #95a5a6;
+}
+
+.loginForm input:focus {
+  outline: none;
+  border-bottom-color: var(--accent-color);
+}
+
+.errorMessage {
+  color: #e74c3c;
+  font-size: 1.1rem;
+  margin-top: -5px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .welcomeContainer {
+    padding: 20px;
+    margin: 60px auto;
+  }
+
+  .welcomeContainer h1 {
+    font-size: 2.5rem;
+  }
+
+  .welcomeContainer p {
+    font-size: 1.2rem;
+  }
+
+  .authButtons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .demoButton, .loginButton {
+    width: 100%;
+    padding: 10px 20px;
+  }
+
+  .loginForm {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .loginForm input {
+    font-size: 1.1rem;
+    padding: 10px 15px;
+  }
 }
 
 @keyframes App-logo-spin {

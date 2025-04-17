@@ -1,9 +1,46 @@
-header {
+.header {
+  padding: 15px 20px;
+  background-color: white;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.headerButtons {
   display: flex;
-  justify-content: end;
-  align-items: center;
-  padding: 10px;
-  background-color: #191919;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
+.registrationButton {
+  background: var(--accent-color);
   color: white;
-  height: 10vh;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.registrationButton:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.addEmployeeButton {
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.addEmployeeButton:hover {
+  background: rgba(52, 152, 219, 0.1);
+  transform: translateY(-2px);
 }

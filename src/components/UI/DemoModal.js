@@ -1,11 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideModal } from "../../store/modalSlice";
+import { showRegistration } from "../../store/AuthSlice"; 
 import styles from "./DemoModal.module.css";
 
 const DemoModal = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modal.isOpen);
+
+  const handleRegistrationClick = () => {
+    dispatch(hideModal());
+    dispatch(showRegistration());
+  };
 
   if (!isOpen) return null;
 
@@ -25,7 +31,7 @@ const DemoModal = () => {
         <div className={styles.buttons}>
           <button
             className={styles.registerButton}
-            onClick={() => dispatch(hideModal())}
+            onClick={handleRegistrationClick}
           >
             Регистрация
           </button>

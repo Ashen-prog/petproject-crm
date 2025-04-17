@@ -202,16 +202,33 @@
   right: 8px;
   background-color: var(--accent-color);
   border-radius: 4px;
-  padding: 8px;
   color: white;
   width: calc(100% - 48px); /* учитываем отступы */
   z-index: 1;
   transition: all 0.2s; /* Добавляем плавный переход */
+  overflow: hidden; /* Для корректного отображения recordHeader */
+}
+
+.recordHeader {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 4px 8px;
+  font-size: 0.85em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.recordTime {
+  font-family: 'Caveat', cursive;
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 .recordContent {
+  padding: 8px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px); /* Вычитаем высоту заголовка */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -226,6 +243,7 @@
 .recordTitle {
   font-weight: bold;
   margin-bottom: 4px;
+  font-size: 1.1em;
 }
 
 .recordDuration {
