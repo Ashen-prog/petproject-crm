@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { showDemoModal } from '../../store/modalSlice';
 import styles from "./Menu.module.css";
 
 const Menu = () => {
-  const [activeItem, setActiveItem] = useState(null);
+  const dispatch = useDispatch();
 
   const menuItems = [
     { id: 1, title: 'Сотрудники' },
@@ -16,14 +18,18 @@ const Menu = () => {
     { id: 9, title: 'Настройки' }
   ];
 
+  const handleItemClick = () => {
+    dispatch(showDemoModal());
+  };
+
   return (
     <nav className={styles.menu}>
       <ul className={styles.menuList}>
         {menuItems.map(item => (
           <li 
             key={item.id}
-            className={`${styles.menuItem} ${activeItem === item.id ? styles.active : ''}`}
-            onClick={() => setActiveItem(item.id)}
+            className={styles.menuItem}
+            onClick={handleItemClick}
           >
             {item.title}
           </li>

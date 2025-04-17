@@ -1,18 +1,21 @@
 .calendar {
   background: var(--background-color);
   border-radius: 8px;
-  padding: 16px;
-  width: 100%;
+  padding: clamp(4px, 1vw, 16px);
+  width: 90%; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 200px; /* Уменьшили минимальную ширину */
+  max-width: 400px; /* Максимальная ширина */
+  margin: 0 auto;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem); /* Адаптивный размер шрифта */
   font-weight: 500;
-  margin-bottom: 16px;
+  margin-bottom: clamp(8px, 2vw, 16px);
   color: var(--text-color);
   text-transform: capitalize;
 }
@@ -20,11 +23,12 @@
 .monthButton {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   cursor: pointer;
-  padding: 4px 8px;
+  padding: clamp(2px, 1vw, 8px);
   color: var(--text-color);
   transition: all 0.2s;
+  touch-action: manipulation; /* Улучшение для тач-устройств */
 }
 
 .monthButton:hover {
@@ -35,21 +39,21 @@
 .weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-bottom: 8px;
+  gap: clamp(2px, 1vw, 4px);
+  margin-bottom: clamp(4px, 1vw, 8px);
 }
 
 .weekday {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
   color: var(--secondary-text-color);
-  padding: 4px;
+  padding: clamp(2px, 1vw, 4px);
 }
 
 .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: clamp(2px, 1vw, 4px);
 }
 
 .day {
@@ -60,6 +64,9 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  padding: clamp(2px, 1vw, 4px);
+  touch-action: manipulation;
 }
 
 .day:hover {
@@ -73,6 +80,108 @@
   font-weight: bold;
 }
 
+/* Добавляем стили для наведения на выбранный день */
+.selected:hover {
+  background-color: var(--accent-color); /* Сохраняем тот же цвет фона */
+  color: white; /* Сохраняем белый цвет текста */
+  opacity: 0.9; /* Добавляем легкое затемнение для обратной связи */
+  transform: scale(1.1); /* Сохраняем эффект увеличения */
+}
+
 .emptyDay {
   aspect-ratio: 1;
+}
+
+/* Медиа-запросы для очень маленьких экранов */
+@media (max-width: 320px) {
+  .calendar {
+    padding: 4px;
+  }
+  
+  .header {
+    font-size: 0.9rem;
+  }
+  
+  .monthButton {
+    padding: 2px 4px;
+  }
+  
+  .weekday {
+    font-size: 0.7rem;
+  }
+  
+  .day {
+    font-size: 0.8rem;
+  }
+}
+
+/* Медиа-запросы для больших экранов */
+@media (min-width: 1200px) {
+  .calendar {
+    padding: 20px;
+  }
+  
+  .day:hover {
+    transform: scale(1.15);
+  }
+}
+
+/* Стили для устройств с тач-скрином */
+@media (hover: none) {
+  .day:hover {
+    transform: none;
+  }
+  
+  .monthButton:hover {
+    transform: none;
+  }
+}
+
+/* Медиа-запросы для экранов меньше 990px */
+@media (max-width: 990px) {
+  .calendar {
+    max-width: 100%;
+    padding: 4px;
+    min-width: auto;
+    box-shadow: none;
+  }
+
+  .header {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  .monthButton {
+    font-size: 0.9rem;
+    padding: 4px;
+  }
+
+  .weekdays {
+    gap: 1px;
+    margin-bottom: 2px;
+  }
+
+  .weekday {
+    font-size: 0.7rem;
+    padding: 1px;
+  }
+
+  .days {
+    gap: 1px;
+  }
+
+  .day {
+    font-size: 0.75rem;
+    padding: 1px;
+  }
+
+  .day:hover {
+    transform: none;
+    background-color: var(--hover-color);
+  }
+
+  .selected:hover {
+    transform: none; /* Отключаем увеличение на маленьких экранах */
+    opacity: 0.8; /* Только затемнение для обратной связи */
+  }
 }
