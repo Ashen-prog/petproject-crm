@@ -1,6 +1,5 @@
 import "./App.css";
 import Header from "./components/Header";
-import Auth from "./components/Auth";
 import React, { Fragment, useState } from "react";
 import WorkSpace from "./components/WorkSpace/WorkSpace";
 import { useSelector, useDispatch } from "react-redux";

@@ -21,7 +21,7 @@ const RecordForm = ({ initialData, selectedTime, onSubmit, onCancel }) => {
 
   const validatePhoneNumber = (phone) => {
     if (!phone) return ""; // Телефон не обязательный
-    const phoneRegex = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+    const phoneRegex = /^(\+7|7|8)?[\s-]?\(?[489][0-9]{2}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/;
     if (!phoneRegex.test(phone)) return "Неверный формат телефона";
     return "";
   };
@@ -60,7 +60,6 @@ const RecordForm = ({ initialData, selectedTime, onSubmit, onCancel }) => {
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
 
-    // Валидация при изменении
     let error = "";
     switch (field) {
       case "title":
@@ -76,9 +75,12 @@ const RecordForm = ({ initialData, selectedTime, onSubmit, onCancel }) => {
         error = validateClientName(value);
         break;
       case "startTime":
-        // При изменении времени перепроверяем длительность
         error = validateDuration(formData.duration, value);
         setErrors(prev => ({ ...prev, duration: error }));
+        break;
+      default:
+        // Для полей без валидации (например, description)
+        error = "";
         break;
     }
     setErrors((prev) => ({ ...prev, [field]: error }));
