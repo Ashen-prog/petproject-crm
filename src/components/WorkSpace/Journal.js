@@ -44,12 +44,37 @@ const Journal = () => {
     return `${formatTime(start)} - ${formatTime(end)}`;
   };
 
-  const handleTimeSlotClick = (time, event) => {
-    setSelectedTime(time);
+  // В компоненте Journal добавим функцию для расчета позиции формы
+  const calculateFormPosition = (clickY) => {
+    const windowHeight = window.innerHeight;
+    const formHeight = 400; // Примерная высота формы
+    const padding = 20;
+    
+    let y = clickY;
+    
+    // Если форма выходит за нижнюю границу экрана
+    if (y + formHeight > windowHeight) {
+      y = windowHeight - formHeight - padding;
+    }
+    
+    // Если форма выходит за верхнюю границу экрана
+    if (y < padding) {
+      y = padding;
+    }
+    
+    return y;
+  };
+
+  const handleTimeSlotClick = (time, e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const y = calculateFormPosition(e.clientY);
+    
     setFormPosition({
-      x: event.clientX,
-      y: event.clientY,
+      x: rect.left + 60, // Отступ от левого края
+      y: y
     });
+    setSelectedTime(time);
+    setEditingRecord(null);
     setShowForm(true);
   };
 

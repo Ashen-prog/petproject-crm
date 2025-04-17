@@ -266,4 +266,29 @@
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  max-height: 90vh; /* Максимальная высота 90% от высоты окна */
+  overflow-y: auto; /* Добавляем скролл если содержимое не помещается */
+  margin: 20px 0; /* Отступы сверху и снизу */
+  transform: translateY(-150px); /* Добавляем смещение вверх */
+}
+
+/* Добавим стили для скроллбара */
+.formPopup::-webkit-scrollbar {
+  width: 4px;
+}
+
+.formPopup::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.formPopup::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 2px;
+}
+
+/* Добавим медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+  .formPopup {
+    transform: translateY(-40px); /* Меньшее смещение для мобильных */
+  }
 }
