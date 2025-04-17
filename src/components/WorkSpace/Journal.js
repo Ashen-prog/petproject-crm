@@ -197,20 +197,23 @@ const Journal = () => {
         ))}
       </div>
       {showForm && (
-        <div
-          className={styles.formPopup}
-          style={{
-            left: formPosition.x,
-            top: formPosition.y,
-          }}
-        >
-          <RecordForm
-            initialData={editingRecord}
-            selectedTime={selectedTime}
-            onSubmit={handleFormSubmit}
-            onCancel={() => setShowForm(false)}
-          />
-        </div>
+        <>
+          <div className={styles.overlay} onClick={() => setShowForm(false)} />
+          <div 
+            className={styles.formPopup}
+            style={{
+              left: formPosition.x,
+              top: formPosition.y
+            }}
+          >
+            <RecordForm 
+              initialData={editingRecord}
+              selectedTime={selectedTime}
+              onSubmit={handleFormSubmit}
+              onCancel={() => setShowForm(false)}
+            />
+          </div>
+        </>
       )}
     </div>
   );
