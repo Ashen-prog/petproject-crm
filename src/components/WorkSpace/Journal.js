@@ -66,6 +66,10 @@ const Journal = () => {
   };
 
   const handleTimeSlotClick = (time, e) => {
+    const [hours] = time.split(':').map(Number);
+    if (hours < 8 || hours >= 22) {
+      return; // Игнорируем клики вне рабочего времени
+    }
     const rect = e.currentTarget.getBoundingClientRect();
     const y = calculateFormPosition(e.clientY);
     
@@ -146,14 +150,11 @@ const Journal = () => {
       return recordDate.toDateString() === currentDate.toDateString();
     }) || [];
 
-  // // Создаем временную шкалу с интервалом 15 минут (24 часа)
-  const timeSlots = Array.from({ length: 96 }, (_, index) => {
-    const hour = Math.floor((index * 15) / 60);
+  // Создаем временную шкалу с интервалом 15 минут (с 8:00 до 22:00)
+  const timeSlots = Array.from({ length: 57 }, (_, index) => { // 57 слотов по 15 минут = 14 часов
+    const hour = Math.floor(index * 15 / 60) + 8; // Начинаем с 8 часов
     const minutes = (index * 15) % 60;
-    return `${String(hour).padStart(2, "0")}:${String(minutes).padStart(
-      2,
-      "0"
-    )}`;
+    return `${String(hour).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
   });
 
   return (

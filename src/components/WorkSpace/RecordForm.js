@@ -26,11 +26,22 @@ const RecordForm = ({ initialData, selectedTime, onSubmit, onCancel }) => {
     return "";
   };
 
-  const validateDuration = (duration) => {
+  const validateDuration = (duration, startTime) => {
     if (!duration) return "Длительность обязательна";
     if (duration < 15) return "Минимальная длительность 15 минут";
     if (duration > 240) return "Максимальная длительность 4 часа";
     if (duration % 15 !== 0) return "Длительность должна быть кратна 15 минутам";
+
+    // Проверка выхода за пределы рабочего времени
+    const [hours, minutes] = startTime.split(":").map(Number);
+    const startMinutes = hours * 60 + minutes;
+    const endMinutes = startMinutes + duration;
+
+    // 22:00 в минутах = 22 * 60 = 1320
+    if (endMinutes > 1320) {
+      return `Максимальная длительность для ${startTime} - ${Math.floor((1320 - startMinutes) / 15) * 15} минут`;
+    }
+
     return "";
   };
 
@@ -40,10 +51,15 @@ const RecordForm = ({ initialData, selectedTime, onSubmit, onCancel }) => {
     return "";
   };
 
+  const validateTime = (time) => {
+    const [hours] = time.split(":").map(Number);
+    return hours >= 8 && hours < 22;
+  };
+
   // Обработчик изменения полей
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    
+    setFormData((prev) => ({ ...prev, [field]: value }));
+
     // Валидация при изменении
     let error = "";
     switch (field) {
@@ -54,49 +70,63 @@ const RecordForm = ({ initialData, selectedTime, onSubmit, onCancel }) => {
         error = validatePhoneNumber(value);
         break;
       case "duration":
-        error = validateDuration(value);
+        error = validateDuration(value, formData.startTime);
         break;
       case "clientName":
         error = validateClientName(value);
         break;
+      case "startTime":
+        // При изменении времени перепроверяем длительность
+        error = validateDuration(formData.duration, value);
+        setErrors(prev => ({ ...prev, duration: error }));
+        break;
     }
-    setErrors(prev => ({ ...prev, [field]: error }));
+    setErrors((prev) => ({ ...prev, [field]: error }));
   };
 
   // Валидация формы перед отправкой
-  const submitHandler = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
+
+    // Проверяем время и длительность
+    if (!validateTime(formData.startTime)) {
+      alert("Выберите время в диапазоне 8:00 - 22:00");
+      return;
+    }
+
+    const durationError = validateDuration(formData.duration, formData.startTime);
+    if (durationError) {
+      setErrors(prev => ({ ...prev, duration: durationError }));
+      return;
+    }
+
     // Проверяем все поля
     const newErrors = {
       title: validateTitle(formData.title),
       phoneNumber: validatePhoneNumber(formData.phoneNumber),
-      duration: validateDuration(formData.duration),
+      duration: validateDuration(formData.duration, formData.startTime),
       clientName: validateClientName(formData.clientName),
     };
 
     setErrors(newErrors);
 
     // Если есть ошибки, прерываем отправку
-    if (Object.values(newErrors).some(error => error)) {
+    if (Object.values(newErrors).some((error) => error)) {
       return;
     }
 
     onSubmit(formData);
   };
 
-  // Создаем массив времени для селекта
-  const timeOptions = Array.from({ length: 96 }, (_, index) => {
-    const hour = Math.floor((index * 15) / 60);
+  // Создаем массив доступных временных слотов
+  const timeOptions = Array.from({ length: 57 }, (_, index) => {
+    const hour = Math.floor((index * 15) / 60) + 8; // Начинаем с 8 часов
     const minutes = (index * 15) % 60;
-    return `${String(hour).padStart(2, "0")}:${String(minutes).padStart(
-      2,
-      "0"
-    )}`;
+    return `${String(hour).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
   });
 
   return (
-    <form className={styles.recordForm} onSubmit={submitHandler}>
+    <form className={styles.recordForm} onSubmit={handleSubmit}>
       <div className={styles.formGroup}>
         <input
           type="text"
@@ -145,10 +175,12 @@ const RecordForm = ({ initialData, selectedTime, onSubmit, onCancel }) => {
           className={styles.timeSelect}
         >
           {timeOptions.map((time) => (
-            <option key={time} value={time}>{time}</option>
+            <option key={time} value={time}>
+              {time}
+            </option>
           ))}
         </select>
-        
+
         <div className={styles.durationWrapper}>
           <input
             type="number"
@@ -165,7 +197,9 @@ const RecordForm = ({ initialData, selectedTime, onSubmit, onCancel }) => {
 
       <div className={styles.buttons}>
         <button type="submit">Сохранить</button>
-        <button type="button" onClick={onCancel}>Отмена</button>
+        <button type="button" onClick={onCancel}>
+          Отмена
+        </button>
       </div>
     </form>
   );
