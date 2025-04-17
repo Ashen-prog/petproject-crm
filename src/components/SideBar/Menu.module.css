@@ -1,0 +1,45 @@
+.menu {
+  width: 100%;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+  background-size: 100% 40px; /* Увеличили размер строк */
+  position: relative;
+  min-height: 400px; /* Добавили минимальную высоту */
+}
+
+.menuItem {
+  padding: 8px 8px 8px 15px; /* Уменьшили отступ слева, т.к. убрали красную линию */
+  margin: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  line-height: 30px; /* Увеличили высоту строки */
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem; /* Увеличили размер шрифта */
+  color: #2c3e50;
+}
+
+.menuItem:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Стили для скроллбара */
+.menuList::-webkit-scrollbar {
+  width: 3px;
+}
+
+.menuList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menuList::-webkit-scrollbar-thumb {
+  background-color: rgba(52, 152, 219, 0.3);
+  border-radius: 2px;
+}

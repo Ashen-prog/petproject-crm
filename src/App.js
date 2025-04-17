@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import Auth from "./components/Auth";
+import React, { Fragment } from "react";
+import WorkSpace from "./components/WorkSpace/WorkSpace";
+import { useSelector } from "react-redux";
+
 
 function App() {
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      {!isAuth && (
+        <div className="Auth">
+          <Header />
+          <Auth />
+        </div>
+      )}
+      {isAuth && (
+        <div className="App">
+
+          <WorkSpace />
+        </div>
+      )}
+    </Fragment>
   );
 }
 

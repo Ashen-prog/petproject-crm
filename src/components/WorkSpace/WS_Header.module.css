@@ -1,0 +1,37 @@
+.WS_Header {
+    background-color: #ffffff;
+    height: 5vw;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.WS_Header button {
+    margin: 0 5px;
+    padding: 8px 15px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.WS_Header button:hover {
+    background: #f5f5f5;
+    border-color: #d0d0d0;
+}
+
+.WS_Header__date {
+    color: #95a5a6;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.arrowButton {
+    font-size: 18px;
+    padding: 5px 15px !important;
+    min-width: 40px;
+}

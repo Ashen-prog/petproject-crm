@@ -1,0 +1,78 @@
+.calendar {
+  background: var(--background-color);
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  text-transform: capitalize;
+}
+
+.monthButton {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: var(--text-color);
+  transition: all 0.2s;
+}
+
+.monthButton:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+  padding: 4px;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.day:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.1);
+}
+
+.selected {
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: bold;
+}
+
+.emptyDay {
+  aspect-ratio: 1;
+}

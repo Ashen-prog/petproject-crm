@@ -1,0 +1,163 @@
+:root {
+  --text-color: #2c3e50;
+  --accent-color: #3498db;
+  --background-color: #ffffff;
+}
+
+.recordForm {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+  background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+  background-size: 100% 24px;
+  position: relative;
+}
+
+.recordForm::before {
+  content: "";
+  position: absolute;
+  left: 40px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #ff9999;
+}
+
+.recordForm input,
+.recordForm textarea {
+  width: 85%;
+  padding: 8px 8px 8px 50px;
+  margin-bottom: 12px;
+  border: none;
+  background: transparent;
+  font-family: "Caveat", cursive;
+  font-size: 1.1rem;
+  line-height: 24px;
+  color: var(--text-color);
+}
+
+.recordForm input:focus,
+.recordForm textarea:focus {
+  outline: none;
+  background-color: rgba(255, 153, 153, 0.1);
+}
+
+.recordForm textarea {
+  resize: none;
+  min-height: 72px;
+}
+
+.recordForm input[type="number"] {
+  width: 120px;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #e1e1e1;
+}
+
+.buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Caveat", cursive;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.buttons button:first-child {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.buttons button:last-child {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buttons button:active {
+  transform: translateY(0);
+}
+
+/* Добавляем стили для placeholder */
+.recordForm input::placeholder,
+.recordForm textarea::placeholder {
+  color: #999;
+  font-family: "Caveat", cursive;
+  opacity: 0.7;
+}
+
+/* Стили для состояния фокуса */
+.recordForm input:focus::placeholder,
+.recordForm textarea:focus::placeholder {
+  opacity: 0.5;
+}
+
+.formRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.timeSelect {
+  flex: 1;
+  padding: 8px;
+  padding-left: 25px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e1e1e1;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  outline: none;
+}
+
+.timeSelect:focus {
+  border-bottom-color: var(--accent-color);
+}
+
+.durationInput {
+  width: 120px;
+}
+
+/* Стилизация опций в селекте */
+.timeSelect option {
+  background: white;
+  color: var(--text-color);
+  padding: 8px;
+}
+
+.formGroup {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.inputError {
+  border-color: #e74c3c !important;
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.errorText {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  color: #e74c3c;
+  font-size: 12px;
+}
+
+.durationWrapper {
+  position: relative;
+  display: inline-block;
+}
