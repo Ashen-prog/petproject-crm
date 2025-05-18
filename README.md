@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# CRM Pet Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Этот проект — простая CRM-система, разработанная на базе React с использованием Redux Toolkit и React Router. Проект предназначен для управления записями, пользователями и рабочими процессами в малых командах или для личного использования.
 
-## Available Scripts
+## Основные возможности
+- Аутентификация пользователей
+- Регистрация новых пользователей
+- Управление записями и журналами
+- Модальные окна для взаимодействия
+- Навигация по рабочему пространству
 
-In the project directory, you can run:
+## Структура проекта
+```
+petproject-crm/
+├── public/                # Статические файлы и шаблон index.html
+├── src/
+│   ├── components/        # Основные компоненты интерфейса
+│   │   ├── Auth.js, Header.js, ...
+│   │   ├── Registration/  # Компоненты регистрации
+│   │   ├── SideBar/       # Боковое меню и календарь
+│   │   ├── UI/            # Универсальные UI-компоненты (модальные окна и др.)
+│   │   └── WorkSpace/     # Рабочее пространство, журнал, формы
+│   ├── store/             # Redux slices и хранилище состояния
+│   │   ├── AuthSlice.js, dateSlice.js, ...
+│   │   └── store.js
+│   ├── App.js             # Главный компонент приложения
+│   ├── index.js           # Точка входа
+│   └── ...
+├── package.json           # Зависимости и скрипты
+└── README.md              # Документация проекта
+```
 
-### `npm start`
+## Быстрый старт
+1. Клонируйте репозиторий:
+   ```sh
+   git clone <ссылка на ваш репозиторий>
+   cd petproject-crm
+   ```
+2. Установите зависимости:
+   ```sh
+   npm install
+   ```
+3. Запустите проект в режиме разработки:
+   ```sh
+   npm start
+   ```
+   Приложение будет доступно по адресу http://localhost:3000
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Основные npm-скрипты
+- `npm start` — запуск приложения в режиме разработки
+- `npm run build` — сборка production-версии
+- `npm test` — запуск тестов
+- `npm run eject` — извлечение конфигурации (не рекомендуется без необходимости)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Зависимости
+- React 19+
+- Redux Toolkit
+- React Router DOM
+- React Scripts
+- @testing-library (для тестирования)
 
-### `npm test`
+## Тестирование
+Для запуска тестов используйте команду:
+```sh
+npm test
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Развертывание
+Для сборки production-версии выполните:
+```sh
+npm run build
+```
 
-### `npm run build`
+## Документация и полезные ссылки
+- [Документация Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
+- [Документация React](https://reactjs.org/)
+- [Документация Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Router](https://reactrouter.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Если у вас есть предложения по улучшению или вы нашли ошибку, создайте issue или отправьте pull request.
