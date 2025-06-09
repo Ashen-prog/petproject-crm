@@ -1,8 +1,14 @@
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import store from './store/store';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('shows demo button when user is not authenticated', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const demoButton = screen.getByRole('button', { name: /демо-режим/i });
+  expect(demoButton).toBeInTheDocument();
 });
