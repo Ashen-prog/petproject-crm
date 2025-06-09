@@ -5,7 +5,11 @@ import WorkSpace from "./components/WorkSpace/WorkSpace";
 import { useSelector, useDispatch } from "react-redux";
 import DemoModal from "./components/UI/DemoModal";
 import Registration from "./components/Registration/Registration";
-import { login } from "./store/AuthSlice";
+import { loginAsync } from "./store/AuthSlice";
+import { Routes, Route, Navigate } from "react-router-dom";
+import EmployeesPage from "./pages/EmployeesPage";
+import ClientsPage from "./pages/ClientsPage";
+import FinancePage from "./pages/FinancePage";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -19,13 +23,18 @@ function App() {
   });
 
   const handleDemoClick = () => {
-    dispatch(login());
+    dispatch({ type: "auth/login" });
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    setLoginError(true);
-    setTimeout(() => setLoginError(false), 3000); // Скрываем ошибку через 3 секунды
+    const result = await dispatch(
+      loginAsync({ email: formData.login, password: formData.password })
+    );
+    if (loginAsync.rejected.match(result)) {
+      setLoginError(true);
+      setTimeout(() => setLoginError(false), 3000);
+    }
   };
 
   return (
@@ -64,7 +73,13 @@ function App() {
       )}
       {isAuth && (
         <div className="App">
-          <WorkSpace />
+          <Routes>
+            <Route path="/" element={<WorkSpace />} />
+            <Route path="/employees" element={<EmployeesPage />} />
+            <Route path="/clients" element={<ClientsPage />} />
+            <Route path="/finance" element={<FinancePage />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
         </div>
       )}
       <DemoModal />
