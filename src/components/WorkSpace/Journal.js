@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addRecord, updateRecord } from "../../store/recordsSlice";
+import {
+  fetchRecords,
+  createRecord,
+  updateRecordAsync,
+} from "../../store/recordsSlice";
 import styles from "./Journal.module.css";
 import RecordForm from "./RecordForm";
 
@@ -18,6 +22,10 @@ const Journal = () => {
   /////////////////////////// ЗАПИСИ
   const records = useSelector((state) => state.records.items);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchRecords());
+  }, [dispatch]);
 
   // Функция для определения высоты записи на основе длительности
   const getRecordHeight = (duration) => {
@@ -91,21 +99,9 @@ const Journal = () => {
     };
 
     if (editingRecord) {
-      // Обновляем существующую запись, сохраняя её id
-      dispatch(
-        updateRecord({
-          ...editingRecord,
-          ...recordData,
-        })
-      );
+      dispatch(updateRecordAsync({ ...editingRecord, ...recordData }));
     } else {
-      // Создаем новую запись с новым id
-      dispatch(
-        addRecord({
-          ...recordData,
-          id: Date.now(),
-        })
-      );
+      dispatch(createRecord(recordData));
     }
 
     // Сбрасываем состояние формы
