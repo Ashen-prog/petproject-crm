@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./Header.module.css";
-import { useDispatch } from "react-redux";
-import { showRegistration } from "../store/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleRegistrationClick = () => {
-    dispatch(showRegistration());
+    navigate("/registration");
   };
 
   return (
