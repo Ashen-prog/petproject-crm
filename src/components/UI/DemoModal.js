@@ -1,17 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideModal } from "../../store/modalSlice";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./DemoModal.module.css";
 
 const DemoModal = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const isOpen = useSelector((state) => state.modal.isOpen);
 
-  const handleRegistrationClick = () => {
+  const handleClose = () => {
     dispatch(hideModal());
-    navigate("/registration");
   };
 
   if (!isOpen) return null;
@@ -30,16 +28,14 @@ const DemoModal = () => {
           <li>Маркетинговые инструменты</li>
         </ul>
         <div className={styles.buttons}>
-          <button
+          <Link
+            to="/registration"
             className={styles.registerButton}
-            onClick={handleRegistrationClick}
+            onClick={handleClose}
           >
             Регистрация
-          </button>
-          <button
-            className={styles.closeButton}
-            onClick={() => dispatch(hideModal())}
-          >
+          </Link>
+          <button className={styles.closeButton} onClick={handleClose}>
             Закрыть
           </button>
         </div>

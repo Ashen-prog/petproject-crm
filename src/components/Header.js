@@ -1,23 +1,15 @@
 import React from "react";
 import styles from "./Header.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  const navigate = useNavigate();
-
-  const handleRegistrationClick = () => {
-    navigate("/registration");
-  };
 
   return (
     <header className={styles.header}>
       <div className={styles.headerButtons}>
-        <button 
-          className={styles.registrationButton} 
-          onClick={handleRegistrationClick}
-        >
+        <Link to="/registration" className={styles.registrationButton}>
           Регистрация
-        </button>
+        </Link>
       </div>
     </header>
   );
