@@ -1,24 +1,15 @@
 import React from "react";
 import styles from "./Header.module.css";
-import { useDispatch } from "react-redux";
-import { showRegistration } from "../store/AuthSlice";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  const dispatch = useDispatch();
-
-  const handleRegistrationClick = () => {
-    dispatch(showRegistration());
-  };
 
   return (
     <header className={styles.header}>
       <div className={styles.headerButtons}>
-        <button 
-          className={styles.registrationButton} 
-          onClick={handleRegistrationClick}
-        >
+        <Link to="/registration" className={styles.registrationButton}>
           Регистрация
-        </button>
+        </Link>
       </div>
     </header>
   );

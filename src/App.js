@@ -1,77 +1,54 @@
+import React from "react";
 import "./App.css";
-import Header from "./components/Header";
-import React, { Fragment, useState } from "react";
-import WorkSpace from "./components/WorkSpace/WorkSpace";
-import { useSelector, useDispatch } from "react-redux";
-import DemoModal from "./components/UI/DemoModal";
+import { Routes, Route, Navigate } from "react-router-dom";
+import RequireAuth from "./routes/RequireAuth";
+import LoginPage from "./components/LoginPage/LoginPage";
 import Registration from "./components/Registration/Registration";
-import { login } from "./store/AuthSlice";
+import WorkSpace from "./components/WorkSpace/WorkSpace";
+import Journal from "./components/WorkSpace/Journal";
+import DemoModal from "./components/UI/DemoModal";
+import EmployeesPage from "./pages/EmployeesPage";
+import ClientsPage from "./pages/ClientsPage";
+import AnalyticsPage from "./pages/AnalyticsPage";
+import FinancePage from "./pages/FinancePage";
+import ServicesPage from "./pages/ServicesPage";
+import MaterialsPage from "./pages/MaterialsPage";
+import MarketingPage from "./pages/MarketingPage";
+import ReportsPage from "./pages/ReportsPage";
+import SettingsPage from "./pages/SettingsPage";
 
 function App() {
-  const isAuth = useSelector((state) => state.auth.isAuth);
-  const showRegistration = useSelector((state) => state.auth.showRegistration);
-  const dispatch = useDispatch();
-
-  const [loginError, setLoginError] = useState(false);
-  const [formData, setFormData] = useState({
-    login: '',
-    password: ''
-  });
-
-  const handleDemoClick = () => {
-    dispatch(login());
-  };
-
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    setLoginError(true);
-    setTimeout(() => setLoginError(false), 3000); // Скрываем ошибку через 3 секунды
-  };
 
   return (
-    <Fragment>
-      {!isAuth && (
-        <div className="Auth">
-          <Header />
-          <div className="welcomeContainer">
-            <h1>Добро пожаловать в CRM систему</h1>
-            <p>Управляйте вашим бизнесом эффективно</p>
-            <form className="loginForm" onSubmit={handleLoginSubmit}>
-              <input
-                type="text"
-                placeholder="Логин"
-                value={formData.login}
-                onChange={(e) => setFormData({...formData, login: e.target.value})}
-              />
-              <input
-                type="password"
-                placeholder="Пароль"
-                value={formData.password}
-                onChange={(e) => setFormData({...formData, password: e.target.value})}
-              />
-              {loginError && <div className="errorMessage">Неверный логин или пароль</div>}
-              <div className="authButtons">
-                <button type="button" className="demoButton" onClick={handleDemoClick}>
-                  Демо-режим
-                </button>
-                <button type="submit" className="loginButton">
-                  Вход
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-      {isAuth && (
-        <div className="App">
-          <WorkSpace />
-        </div>
-      )}
+    <>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route
+          path="/workspace/*"
+          element={
+            <RequireAuth>
+              <WorkSpace />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<Journal />} />
+          <Route path="journal" element={<Journal />} />
+          <Route path="employees" element={<EmployeesPage />} />
+          <Route path="clients" element={<ClientsPage />} />
+          <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="finance" element={<FinancePage />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="materials" element={<MaterialsPage />} />
+          <Route path="marketing" element={<MarketingPage />} />
+          <Route path="reports" element={<ReportsPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
       <DemoModal />
-      {showRegistration && (
-        <Registration onClose={() => dispatch({ type: 'auth/hideRegistration' })} />
-      )}
-    </Fragment>
+    </>
   );
 }
 

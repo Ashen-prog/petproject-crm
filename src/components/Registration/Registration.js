@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styles from "./Registration.module.css";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const Registration = ({ onClose }) => {
+const Registration = () => {
   const [formData, setFormData] = useState({
     companyName: "",
     name: "",
@@ -11,10 +12,11 @@ const Registration = ({ onClose }) => {
     employees: "1-5",
   });
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // В демо-версии просто закрываем форму
-    onClose();
+    navigate(isAuth ? "/workspace" : "/login");
   };
 
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -99,9 +101,9 @@ const Registration = ({ onClose }) => {
             <button
               type="button"
               className={styles.closeButton}
-              onClick={onClose}
+              onClick={() => navigate(isAuth ? "/workspace" : "/login")}
             >
-              {`${isAuth ? "Вернуться в демо-режим" : "Закрыть"}`}
+              {isAuth ? "Вернуться в демо-режим" : "Закрыть"}
             </button>
           </div>
         </form>
