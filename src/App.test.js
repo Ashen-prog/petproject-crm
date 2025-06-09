@@ -28,3 +28,4 @@ test('redirects to login when accessing workspace without auth', () => {
   const welcome = screen.getByText(/добро пожаловать в CRM систему/i);
   expect(welcome).toBeInTheDocument();
 });
+
