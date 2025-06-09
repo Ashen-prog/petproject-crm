@@ -51,6 +51,16 @@ petproject-crm/
 - `/login` – страница входа
 - `/registration` – форма регистрации
 - `/workspace` – рабочее пространство (доступно только после авторизации)
+- `/workspace/journal` – журнал записей
+- `/workspace/employees` – сотрудники
+- `/workspace/clients` – клиенты
+- `/workspace/analytics` – аналитика
+- `/workspace/finance` – финансы
+- `/workspace/services` – услуги и цены
+- `/workspace/materials` – расходные материалы
+- `/workspace/marketing` – маркетинг
+- `/workspace/reports` – отчеты
+- `/workspace/settings` – настройки
 
 ## Основные npm-скрипты
 - `npm start` — запуск приложения в режиме разработки

@@ -2,11 +2,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCurrentDate } from "../../store/dateSlice";
 import { logout } from "../../store/AuthSlice";
 import { showDemoModal } from "../../store/modalSlice";
+import { useNavigate } from "react-router-dom";
 import styles from "./WS_Header.module.css";
 
 const WS_Header = () => {
   const currentDateTimestamp = useSelector((state) => state.date.currentDate);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Конвертируем timestamp в Date только когда нужно
   const currentDate = new Date(currentDateTimestamp);
@@ -25,6 +27,7 @@ const WS_Header = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/login');
   };
 
   const handleAddEmployeeClick = () => {

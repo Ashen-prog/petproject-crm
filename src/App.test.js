@@ -15,3 +15,16 @@ test('renders login page by default', () => {
   const welcome = screen.getByText(/добро пожаловать в CRM систему/i);
   expect(welcome).toBeInTheDocument();
 });
+
+test('redirects to login when accessing workspace without auth', () => {
+  window.history.pushState({}, '', '/workspace');
+  render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  );
+  const welcome = screen.getByText(/добро пожаловать в CRM систему/i);
+  expect(welcome).toBeInTheDocument();
+});
