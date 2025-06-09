@@ -77,6 +77,9 @@ npm run build
 - [Документация Redux Toolkit](https://redux-toolkit.js.org/)
 - [React Router](https://reactrouter.com/)
 
+## License
+This project is licensed under the terms of the MIT License. See the [LICENSE](LICENSE) file for details.
+
 ---
 
 Если у вас есть предложения по улучшению или вы нашли ошибку, создайте issue или отправьте pull request.
