@@ -4,6 +4,7 @@ import dateReducer from "./dateSlice";
 import recordsReducer from "./recordsSlice";
 import modalReducer from "./modalSlice";
 import employeesReducer from "./employeesSlice";
+import clientsReducer from "./clientsSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     records: recordsReducer,
     modal: modalReducer,
     employees: employeesReducer,
+    clients: clientsReducer,
   },
 });
 
