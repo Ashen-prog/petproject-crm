@@ -5,6 +5,7 @@ import recordsReducer from "./recordsSlice";
 import modalReducer from "./modalSlice";
 import employeesReducer from "./employeesSlice";
 import clientsReducer from "./clientsSlice";
+import financesReducer from "./financesSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     modal: modalReducer,
     employees: employeesReducer,
     clients: clientsReducer,
+    finances: financesReducer,
   },
 });
 
