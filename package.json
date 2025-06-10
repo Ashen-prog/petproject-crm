@@ -1,6 +1,9 @@
 {
-  "name": "crm",
-  "version": "0.1.0",
+  "name": "crm-system",
+  "version": "1.0.0",
+  "description": "Профессиональная CRM-система для управления бизнес-процессами",
+  "keywords": ["crm", "react", "redux", "business", "management"],
+  "author": "CRM Development Team",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
