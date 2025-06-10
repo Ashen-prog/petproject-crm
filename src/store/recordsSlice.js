@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios/dist/node/axios.cjs";
+import axios from "axios";
 
 const API_URL = "http://localhost:4000/api";
 
@@ -69,7 +69,23 @@ export const recordsSlice = createSlice({
     items: [],
     loading: false,
   },
-  reducers: {},
+  reducers: {
+    // Локальные действия для демо-режима
+    addRecordLocal: (state, action) => {
+      const record = {
+        id: Date.now().toString(),
+        ...action.payload
+      };
+      state.items.push(record);
+    },
+    updateRecordLocal: (state, action) => {
+      const idx = state.items.findIndex((r) => r.id === action.payload.id);
+      if (idx !== -1) state.items[idx] = action.payload;
+    },
+    deleteRecordLocal: (state, action) => {
+      state.items = state.items.filter((r) => r.id !== action.payload);
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchRecords.fulfilled, (state, action) => {
@@ -91,4 +107,6 @@ export const recordsSlice = createSlice({
       });
   },
 });
+
+export const { addRecordLocal, updateRecordLocal, deleteRecordLocal } = recordsSlice.actions;
 export default recordsSlice.reducer;

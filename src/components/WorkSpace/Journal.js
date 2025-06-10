@@ -4,6 +4,8 @@ import {
   fetchRecords,
   createRecord,
   updateRecordAsync,
+  addRecordLocal,
+  updateRecordLocal,
 } from "../../store/recordsSlice";
 import styles from "./Journal.module.css";
 import RecordForm from "./RecordForm";
@@ -18,14 +20,16 @@ const Journal = () => {
   // Добавляем проверку валидности даты
   const currentDate = new Date(currentDateTimestamp);
   const isValidDate = !isNaN(currentDate.getTime());
-
   /////////////////////////// ЗАПИСИ
   const records = useSelector((state) => state.records.items);
+  const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(fetchRecords());
-  }, [dispatch]);
+    // Загружаем записи только если есть токен (не демо-режим)
+    if (token) {
+      dispatch(fetchRecords());
+    }
+  }, [dispatch, token]);
 
   // Функция для определения высоты записи на основе длительности
   const getRecordHeight = (duration) => {
@@ -89,7 +93,6 @@ const Journal = () => {
     setEditingRecord(null);
     setShowForm(true);
   };
-
   const handleFormSubmit = (formData) => {
     const recordData = {
       ...formData,
@@ -99,9 +102,23 @@ const Journal = () => {
     };
 
     if (editingRecord) {
-      dispatch(updateRecordAsync({ ...editingRecord, ...recordData }));
+      // Если редактируем существующую запись
+      if (token) {
+        // Если есть токен - отправляем на сервер
+        dispatch(updateRecordAsync({ ...editingRecord, ...recordData }));
+      } else {
+        // Демо-режим - обновляем локально
+        dispatch(updateRecordLocal({ ...editingRecord, ...recordData }));
+      }
     } else {
-      dispatch(createRecord(recordData));
+      // Создаем новую запись
+      if (token) {
+        // Если есть токен - отправляем на сервер
+        dispatch(createRecord(recordData));
+      } else {
+        // Демо-режим - создаем локально
+        dispatch(addRecordLocal(recordData));
+      }
     }
 
     // Сбрасываем состояние формы

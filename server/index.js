@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { Low, JSONFile } = require('lowdb');
+const { Low } = require('lowdb');
+const { JSONFile } = require('lowdb/node');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
@@ -10,9 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 const adapter = new JSONFile('server/db.json');
-const db = new Low(adapter);
-
-db.data = db.data || { users: [], records: [], employees: [] };
+const defaultData = { users: [], records: [], employees: [] };
+const db = new Low(adapter, defaultData);
 
 const SECRET = 'crm-secret';
 

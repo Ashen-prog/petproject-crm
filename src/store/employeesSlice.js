@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios/dist/node/axios.cjs";
+import axios from "axios";
 
 const API_URL = "http://localhost:4000/api";
 
@@ -51,7 +51,19 @@ export const deleteEmployee = createAsyncThunk(
 const employeesSlice = createSlice({
   name: "employees",
   initialState: { items: [], loading: false },
-  reducers: {},
+  reducers: {
+    // Локальные действия для демо-режима
+    addEmployeeLocal: (state, action) => {
+      const employee = {
+        id: Date.now().toString(),
+        ...action.payload
+      };
+      state.items.push(employee);
+    },
+    deleteEmployeeLocal: (state, action) => {
+      state.items = state.items.filter((e) => e.id !== action.payload);
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEmployees.fulfilled, (state, action) => {
@@ -70,4 +82,5 @@ const employeesSlice = createSlice({
   },
 });
 
+export const { addEmployeeLocal, deleteEmployeeLocal } = employeesSlice.actions;
 export default employeesSlice.reducer;
