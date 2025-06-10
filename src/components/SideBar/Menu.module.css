@@ -30,6 +30,23 @@
   background-color: rgba(52, 152, 219, 0.1);
 }
 
+.menuItem a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.menuItem a:hover {
+  color: #3498db;
+}
+
+.menuItem a.active {
+  color: #2980b9;
+  font-weight: 600;
+}
+
 /* Стили для скроллбара */
 .menuList::-webkit-scrollbar {
   width: 3px;

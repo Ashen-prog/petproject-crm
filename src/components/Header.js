@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
 import { useDispatch } from "react-redux";
-import { showRegistration } from "../store/AuthSlice";
+import { showRegistration } from "../store/authSlice";
 
 const Header = () => {
   const dispatch = useDispatch();

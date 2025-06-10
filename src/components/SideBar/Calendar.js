@@ -5,6 +5,7 @@ import { setCurrentDate } from '../../store/dateSlice';
 
 const Calendar = () => {
   const currentDate = new Date(useSelector(state => state.date.currentDate));
+  const today = new Date(); // Сегодняшняя дата
   const dispatch = useDispatch();
 
   // Обработчик клика по дню
@@ -40,14 +41,17 @@ const Calendar = () => {
   for (let i = 0; i < firstDayOfMonth - 1; i++) {
     days.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
   }
-
   // Добавляем дни месяца
   for (let i = 1; i <= daysInMonth; i++) {
     const isSelected = i === currentDate.getDate();
+    const isToday = i === today.getDate() && 
+                   currentDate.getMonth() === today.getMonth() && 
+                   currentDate.getFullYear() === today.getFullYear();
+    
     days.push(
       <div
         key={i}
-        className={`${styles.day} ${isSelected ? styles.selected : ''}`}
+        className={`${styles.day} ${isSelected ? styles.selected : ''} ${isToday ? styles.today : ''}`}
         onClick={() => handleDayClick(i)}
       >
         {i}

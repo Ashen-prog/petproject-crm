@@ -1,8 +1,8 @@
 import Journal from "./Journal";
 import SideBar from "../SideBar/SideBar";
-import styles from "./WS_Body.module.css";
+import styles from "./WorkspaceBody.module.css";
 
-const WS_Body = (props) => {
+const WorkspaceBody = (props) => {
   return (
     <div className={styles.WsBody}>
       <SideBar />
@@ -11,4 +11,4 @@ const WS_Body = (props) => {
   );
 };
 
-export default WS_Body;
+export default WorkspaceBody;

@@ -80,12 +80,40 @@
   font-weight: bold;
 }
 
+.today {
+  background-color: #e8f4fd;
+  border: 2px solid #3498db;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Стили для сегодняшней даты, когда она выбрана */
+.selected.today {
+  background-color: var(--accent-color);
+  color: white;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
 /* Добавляем стили для наведения на выбранный день */
 .selected:hover {
   background-color: var(--accent-color); /* Сохраняем тот же цвет фона */
   color: white; /* Сохраняем белый цвет текста */
   opacity: 0.9; /* Добавляем легкое затемнение для обратной связи */
   transform: scale(1.1); /* Сохраняем эффект увеличения */
+}
+
+/* Hover эффект для сегодняшней даты */
+.today:hover {
+  background-color: #d4edda;
+  border-color: #2980b9;
+  transform: scale(1.1);
+}
+
+/* Hover эффект для выбранной сегодняшней даты */
+.selected.today:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
 }
 
 .emptyDay {

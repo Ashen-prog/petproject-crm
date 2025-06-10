@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentDate } from "../../store/dateSlice";
-import { logout } from "../../store/AuthSlice";
+import { logout } from "../../store/authSlice";
 import { showDemoModal } from "../../store/modalSlice";
-import styles from "./WS_Header.module.css";
+import styles from "./WorkspaceHeader.module.css";
 
-const WS_Header = () => {
+const WorkspaceHeader = () => {
   const currentDateTimestamp = useSelector((state) => state.date.currentDate);
   const dispatch = useDispatch();
 
@@ -59,4 +59,4 @@ const WS_Header = () => {
   );
 };
 
-export default WS_Header;
+export default WorkspaceHeader;

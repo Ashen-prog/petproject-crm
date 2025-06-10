@@ -11,10 +11,14 @@ const Menu = () => {
 
   return (
     <nav className={styles.menu}>
-      <ul className={styles.menuList}>
-        {menuItems.map(item => (
+      <ul className={styles.menuList}>        {menuItems.map(item => (
           <li key={item.id} className={styles.menuItem}>
-            <NavLink to={item.path}>{item.title}</NavLink>
+            <NavLink 
+              to={item.path}
+              className={({ isActive }) => isActive ? styles.active : ''}
+            >
+              {item.title}
+            </NavLink>
           </li>
         ))}
       </ul>

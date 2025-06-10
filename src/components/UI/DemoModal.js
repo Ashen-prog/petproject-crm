@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideModal } from "../../store/modalSlice";
-import { showRegistration } from "../../store/AuthSlice"; 
+import { showRegistration } from "../../store/authSlice"; 
 import styles from "./DemoModal.module.css";
 
 const DemoModal = () => {

@@ -1,11 +1,11 @@
-import WS_Body from "./WS_Body";
-import WS_Header from "./WS_Header";
+import WorkspaceBody from "./WorkspaceBody";
+import WorkspaceHeader from "./WorkspaceHeader";
 
 const WorkSpace = () => {
   return (
     <div>
-      <WS_Header />
-      <WS_Body />
+      <WorkspaceHeader />
+      <WorkspaceBody />
     </div>
   );
 };

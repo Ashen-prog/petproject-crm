@@ -5,7 +5,7 @@ import WorkSpace from "./components/WorkSpace/WorkSpace";
 import { useSelector, useDispatch } from "react-redux";
 import DemoModal from "./components/UI/DemoModal";
 import Registration from "./components/Registration/Registration";
-import { loginAsync } from "./store/AuthSlice";
+import { loginAsync } from "./store/authSlice";
 import { Routes, Route, Navigate } from "react-router-dom";
 import EmployeesPage from "./pages/EmployeesPage";
 import ClientsPage from "./pages/ClientsPage";

@@ -50,18 +50,65 @@ export const deleteEmployee = createAsyncThunk(
 
 const employeesSlice = createSlice({
   name: "employees",
-  initialState: { items: [], loading: false },
+  initialState: { 
+    items: [
+      // Демо данные для начала
+      {
+        id: '1',
+        name: 'Анна Иванова',
+        position: 'Менеджер',
+        phone: '+7 (999) 123-45-67',
+        email: 'anna@company.ru',
+        avatar: null
+      },
+      {
+        id: '2', 
+        name: 'Петр Сидоров',
+        position: 'Разработчик',
+        phone: '+7 (999) 765-43-21',
+        email: 'petr@company.ru',
+        avatar: null
+      },
+      {
+        id: '3',
+        name: 'Мария Петрова', 
+        position: 'Дизайнер',
+        phone: '+7 (999) 555-66-77',
+        email: 'maria@company.ru',
+        avatar: null
+      }
+    ], 
+    loading: false,
+    searchQuery: '',
+    sortBy: 'name'
+  },
   reducers: {
     // Локальные действия для демо-режима
     addEmployeeLocal: (state, action) => {
       const employee = {
         id: Date.now().toString(),
-        ...action.payload
+        name: action.payload.name || '',
+        position: action.payload.position || '',
+        phone: action.payload.phone || '',
+        email: action.payload.email || '',
+        avatar: null
       };
       state.items.push(employee);
     },
+    updateEmployeeLocal: (state, action) => {
+      const index = state.items.findIndex(e => e.id === action.payload.id);
+      if (index !== -1) {
+        state.items[index] = { ...state.items[index], ...action.payload };
+      }
+    },
     deleteEmployeeLocal: (state, action) => {
       state.items = state.items.filter((e) => e.id !== action.payload);
+    },
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
+    },
+    setSortBy: (state, action) => {
+      state.sortBy = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -82,5 +129,5 @@ const employeesSlice = createSlice({
   },
 });
 
-export const { addEmployeeLocal, deleteEmployeeLocal } = employeesSlice.actions;
+export const { addEmployeeLocal, updateEmployeeLocal, deleteEmployeeLocal, setSearchQuery, setSortBy } = employeesSlice.actions;
 export default employeesSlice.reducer;
